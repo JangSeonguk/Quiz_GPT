@@ -7,6 +7,9 @@ st.set_page_config(
 
 
 with st.sidebar:
+    st.link_button(
+        "Open Git", "https://github.com/JangSeonguk/Quiz_GPT/blob/main/app.py"
+    )
     choice = st.selectbox(
         "Choose what you want to use.",
         (
