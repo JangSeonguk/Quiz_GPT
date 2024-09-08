@@ -234,24 +234,28 @@ def wiki_search(term):
 with st.sidebar:
     docs = None
     topic = None
-    choice = st.selectbox(
-        "Choose what you want to use.",
-        (
-            "File",
-            "Wikipedia Article",
-        ),
-    )
-    if choice == "File":
-        file = st.file_uploader(
-            "Upload a .docx , .txt or .pdf file",
-            type=["pdf", "txt", "docx"],
+    api_key = st.text_input("Enter your Open API Key")
+    file = ""
+    if api_key:
+        st.write(f"API Key : {api_key}")
+        choice = st.selectbox(
+            "Choose what you want to use.",
+            (
+                "File",
+                "Wikipedia Article",
+            ),
         )
-        if file:
-            docs = split_file(file)
-    else:
-        topic = st.text_input("Search Wikipedia...")
-        if topic:
-            docs = wiki_search(topic)
+        if choice == "File":
+            file = st.file_uploader(
+                "Upload a .docx , .txt or .pdf file",
+                type=["pdf", "txt", "docx"],
+            )
+            if file:
+                docs = split_file(file)
+        else:
+            topic = st.text_input("Search Wikipedia...")
+            if topic:
+                docs = wiki_search(topic)
 
 
 if not docs:
